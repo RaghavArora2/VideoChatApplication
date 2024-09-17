@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Call</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background color */
+            color: #e0e0e0; /* Light text color */
+        }
+
+        #root {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .social-media {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-media a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: #007BFF; /* Hover effect to add some contrast */
+        }
+
+        .social-media i {
+            font-size: 32px;
+        }
+    </style>
+    <!-- Link to Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Social Media Links -->
+    <div class="social-media">
+        <a href="https://www.instagram.com/mrraghavarora/" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/raghav-arora2003/" target="_blank"><i class="fa fa-linkedin"></i></a>
+        <a href="https://github.com/RaghavArora2" target="_blank"><i class="fa fa-github"></i></a>
+    </div>
+
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+    <script>
+        window.onload = function () {
+            function getUrlParams(url) {
+                let urlStr = url.split('?')[1];
+                const urlSearchParams = new URLSearchParams(urlStr);
+                const result = Object.fromEntries(urlSearchParams.entries());
+                return result;
+            }
+
+            const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+            const userID = Math.floor(Math.random() * 10000) + "";
+            const userName = getUrlParams(window.location.href)['username'] || "userName" + userID;
+            const appID = 746169649;
+            const serverSecret = "ae38ace04d4a6e2fc3643e359a20c561";
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.querySelector("#root"),
+                sharedLinks: [{
+                    name: 'Personal link',
+                    url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
+                }],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
+                },
+                turnOnMicrophoneWhenJoining: false,
+                turnOnCameraWhenJoining: false,
+                showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: 2,
+                layout: "Auto",
+                showLayoutButton: false,
+            });
+        }
+    </script>
+</body>
+</html>
