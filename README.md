@@ -37,12 +37,7 @@ To run this project locally, follow these steps:
    ./mvnw spring-boot:run
    ```
 
-3. **Set Up Frontend**
-
-   - Open the `videocall.html` file in a web browser.
-   - Ensure that your backend server is running and properly configured.
-
-4. **Configuration**
+3. **Configuration**
 
    - Update `appID` and `serverSecret` in the `videocall.html` file with your ZegoCloud credentials.
 
@@ -51,9 +46,9 @@ To run this project locally, follow these steps:
    const serverSecret = "YOUR_SERVER_SECRET";
    ```
 
-5. **Accessing the Application**
+4. **Accessing the Application**
 
-   - Open the `videocall.html` file in your browser to start using the video call features.
+   - Open localhost:8080 to register then login.
 
 ## Social Media
 
@@ -70,11 +65,8 @@ Contributions are welcome! Please submit a pull request or open an issue if you 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgements
 
 - **ZegoCloud** for providing the video call SDK.
 - **Spring Boot** for simplifying backend development.
 - **Font Awesome** for providing icons.
-
----
