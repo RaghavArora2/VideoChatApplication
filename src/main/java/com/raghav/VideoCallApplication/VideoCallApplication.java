@@ -20,19 +20,19 @@ public class VideoCallApplication {
 			service.register(User.builder()
 					.username("Raghav")
 					.email("raghav@gmail.com")
-					.password("raghav")
+					.password("123")
 					.build());
 	
 			service.register(User.builder()
-					.username("Raghav1")
-					.email("raghav1@gmail.com")
-					.password("raghav")
+					.username("Test")
+					.email("test@gmail.com")
+					.password("123")
 					.build());
 	
 			service.register(User.builder()
-					.username("Raghav2")
-					.email("raghav2@gmail.com")
-					.password("raghav")
+					.username("Test2")
+					.email("test2@gmail.com")
+					.password("123")
 					.build());
 	
 			// Log successful user registration

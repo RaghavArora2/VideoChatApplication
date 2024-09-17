@@ -11,21 +11,23 @@
             font-family: Arial, sans-serif;
             background-color: #121212; /* Dark background color */
             color: #e0e0e0; /* Light text color */
+            position: relative;
         }
 
         #root {
             width: 100vw;
             height: 100vh;
+            position: relative;
         }
 
         .social-media {
-            position: absolute;
+            position: fixed; /* Fixed position to keep it in view */
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 20px; /* Move the icons to the left */
             display: flex;
             justify-content: center;
             gap: 20px;
+            z-index: 1000; /* Ensure it's on top */
         }
 
         .social-media a {
@@ -50,7 +52,7 @@
     <div id="root"></div>
 
     <!-- Social Media Links -->
-    <div class="social-media">
+    <div class="social-media" id="socialMedia">
         <a href="https://www.instagram.com/mrraghavarora/" target="_blank"><i class="fa fa-instagram"></i></a>
         <a href="https://www.linkedin.com/in/raghav-arora2003/" target="_blank"><i class="fa fa-linkedin"></i></a>
         <a href="https://github.com/RaghavArora2" target="_blank"><i class="fa fa-github"></i></a>
@@ -94,7 +96,25 @@
                 maxUsers: 2,
                 layout: "Auto",
                 showLayoutButton: false,
+                onRoomStateChanged: function (state) {
+                    if (state === 'joined' || state === 'connecting') {
+                        // Optionally handle the state changes here if needed
+                    }
+                }
             });
+
+            // Use MutationObserver to detect changes in the #root element
+            const observer = new MutationObserver((mutationsList) => {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        if (document.querySelector("#root").childElementCount > 0) {
+                            // Optionally handle the detected changes here if needed
+                        }
+                    }
+                }
+            });
+
+            observer.observe(document.querySelector("#root"), { childList: true });
         }
     </script>
 </body>
